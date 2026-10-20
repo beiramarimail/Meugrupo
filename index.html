@@ -217,6 +217,15 @@ a.btn{text-decoration:none}
 :root[data-theme="light"] .lbl,:root[data-theme="light"] .sec{color:#5f8b74}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
+<script>/* cor da app: muda a cada abertura (ciclo guardado no aparelho) */
+(function(){
+  var H=[148,208,262,178,38],i=0,k="tsxp.v2.pal";
+  try{var v=parseInt(localStorage.getItem(k),10);i=(isNaN(v)?Math.floor(Math.random()*H.length):v+1)%H.length;localStorage.setItem(k,String(i));}catch(e){i=Math.floor(Math.random()*H.length);}
+  var h=H[i];function c(s,l,a){return "hsl("+h+" "+s+"% "+l+"%)";}
+  var n="--y1:"+c(78,77)+";--y2:"+c(60,46)+";--yel:"+c(60,46)+";--on-y:"+c(65,8)+";--primary:"+c(60,46)+";--on-primary:"+c(65,8)+";--amber:"+c(78,77)+";--amber-c:"+c(30,17)+";--ok:"+c(60,46)+";--togbd:"+c(45,32)+";--togfg:"+c(55,65)+";--avA:"+c(38,45)+";--avB:"+c(45,32)+";--avfg:"+c(100,97)+";--lg1:"+c(78,77)+";--lg2:"+c(60,46)+";--lg3:"+c(78,77)+";",
+      d="--bg:"+c(10,96)+";--surface-2:"+c(9,94)+";--surface-3:"+c(12,90)+";--line:"+c(10,82)+";--appline:"+c(10,88)+";--track:"+c(10,88)+";--tl:"+c(8,76)+";--y1:"+c(22,38)+";--y2:"+c(28,69)+";--yel:"+c(28,69)+";--on-y:"+c(40,21)+";--primary:"+c(28,69)+";--on-primary:"+c(40,21)+";--pc:"+c(9,94)+";--amber:"+c(24,34)+";--amber-c:"+c(30,94)+";--ok:"+c(26,60)+";--grad:linear-gradient(135deg,"+c(40,88)+","+c(35,76)+");--togbd:"+c(28,69)+";--togfg:"+c(22,38)+";--avA:"+c(40,80)+";--avB:"+c(28,69)+";--avfg:"+c(40,24)+";--lg1:"+c(40,88)+";--lg2:"+c(28,64)+";--lg3:"+c(22,38)+";";
+  var st=document.createElement("style");st.id="pal";st.textContent=":root{"+n+"}:root[data-theme=\"light\"]{"+d+"}";document.head.appendChild(st);
+})();</script>
 </head>
 <body>
 
@@ -842,7 +851,7 @@ function renderRegs(){
 
 /* modo dia / noite */
 function setTheme(t){document.documentElement.setAttribute("data-theme",t);lsSet("tsxp.v2.theme",t);
-  var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="dark"?"#16181b":"#f3f5f4");}
+  var m=document.querySelector('meta[name="theme-color"]');if(m)var bg="";try{bg=getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();}catch(e){}m.setAttribute("content",t==="dark"?"#16181b":(bg||"#f3f5f4"));}
 document.querySelectorAll(".themeBtn").forEach(function(b){b.onclick=function(){setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");};});
 setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"dark":"light");
 
