@@ -1,6 +1,6 @@
 {
-  "name": "Meu Grupo",
-  "short_name": "Meu Grupo",
+  "name": "BMH",
+  "short_name": "BMH",
   "description": "Lança o relatório de campo do grupo e gera o ficheiro .t19 para o Tswinp.",
   "lang": "pt",
   "start_url": "./",
